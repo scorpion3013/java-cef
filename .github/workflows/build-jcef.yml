@@ -122,7 +122,7 @@ jobs:
           PLATFORM="${{ matrix.platform }}"
           
           response=$(curl -w "\n%{http_code}" -X POST \
-            -H "Authorization: $API_TOKEN" \
+            -H "Authorization: Bearer $API_TOKEN" \
             -F "file=@${PLATFORM}.tar.gz" \
             "http://nossl.api.liquidbounce.net/api/v3/resource/mcef-cef/${{ github.sha }}/${PLATFORM}")
           
