@@ -121,9 +121,10 @@ jobs:
         run: |
           PLATFORM="${{ matrix.platform }}"
           
-          response=$(curl -w "\n%{http_code}" -X POST \
+          response=$(curl -w "\n%{http_code}" -X PUT \
             -H "Authorization: Bearer $API_TOKEN" \
-            -F "file=@${PLATFORM}.tar.gz" \
+            -H "Content-Type: application/x-gzip" \
+            --data-binary "@${PLATFORM}.tar.gz" \
             "http://nossl.api.liquidbounce.net/api/v3/resource/mcef-cef/${{ github.sha }}/${PLATFORM}")
           
           status_code=$(echo "$response" | tail -n1)
